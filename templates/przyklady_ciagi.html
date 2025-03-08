@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Przykłady</title>  
+    <meta charset="utf-8">
+    <link href="{{ url_for('static', filename='styl_strony_glownej.css') }}" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- JavaScript dla przycisków "Pokaż rozwiązanie" -->
+    <script>
+        function toggleSolution(index) {
+            var solution = document.getElementById('solution-' + index);
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+    </script>
+
+    <style>
+        /* Styl dla przycisków */
+        .toggle-button {
+            background-color: #850e0e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .solution {
+            display: none;
+            margin-top: 10px;
+            margin-bottom: 60px;
+        }
+
+        /* Styl dla treści */
+        #tresc {
+            margin-left: 20px; /* Dostosowanie marginesu, aby treści były w tych samych miejscach */
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="naglowek">
+        <h1>Przykłady obliczania granic ciągów</h1>
+    </div>
+    <div id="panel">
+        <div id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="{{ url_for('strona_glowna') }}"><h3>Strona Główna</h3></a></li>
+                <li><h3>Granice funkcji</h3>
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('twierdzenia') }}">Twierdzenia</a></li>                           
+                        <li><a href="{{ url_for('wzorywlasnosci') }}">Wzory, własności</a></li>                                          
+                        <li><a href="{{ url_for('przyklady_funkcje') }}">Przykłady</a></li>
+                    </ul>
+                </li>
+                <li><h3>Granice ciągów</h3>
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('twierdzenia_ciagi') }}">Twierdzenia</a></li>
+                        <li><a href="{{ url_for('wzorywlasnosci_ciagi') }}">Wzory i własności</a></li>
+                        <li><a href="{{ url_for('przyklady_ciagi') }}">Przykłady</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="tresc">
+            <h2><strong>Zadanie 1. Sprawdzić monotoniczność ciągu o wyrazie ogólnym:</strong></h2>
+            <ol>
+                <li>\( a_n = \frac{2}{n+3} \)</li>
+                <button class="toggle-button" onclick="toggleSolution(1)">Pokaż rozwiązanie</button>
+                <div id="solution-1" class="solution">
+                    <p><strong><u>Rozwiązanie:</u></strong></p>
+                    <p>Sprawdzamy znak różnicy \( a_{n+1} - a_n \). Jeśli jest większa od zera to ciąg jest rosnący, jeśli zaś mniejsza od zera to ciąg jest malejący. Wyraz \( a_n = \frac{2}{n+3} \), zaś \( a_{n+1} = \frac{2}{(n+1)+3} = \frac{2}{n+4} \) (w miejsce \( n \) wstawiamy \( n+1 \)). Zatem:</p>
+                    <p>\[
+                        a_{n+1} - a_n = \frac{2}{n+4} - \frac{2}{n+3} = \frac{2(n+3) - 2(n+4)}{(n+4)(n+3)} = \frac{2n + 6 - 2n - 8}{(n+4)(n+3)} = \frac{-2}{(n+4)(n+3)} < 0
+                    \]</p>
+                    <p>gdyż \( n \in \mathbb{N} \), więc mianownik jest dodatni, a licznik ujemny.</p>
+                    <p>Otrzymaliśmy więc, że ciąg o wyrazie ogólnym \( a_n = \frac{2}{n+3} \), jest <strong>malejący</strong>.</p>
+                </div>
+
+                <li>\( a_n = \frac{n+1}{n+2} \)</li>
+                <button class="toggle-button" onclick="toggleSolution(2)">Pokaż rozwiązanie</button>
+                <div id="solution-2" class="solution">
+                    <p><strong><u>Rozwiązanie:</u></strong></p>
+                    <p>Sprawdzamy znak różnicy \( a_{n+1} - a_n \). Jeśli jest większa od zera to ciąg jest rosnący, jeśli zaś mniejsza od zera to ciąg jest malejący. Wyraz \( a_n = \frac{n+1}{n+2} \), zaś \( a_{n+1} = \frac{(n+1)+1}{(n+1)+2} = \frac{n+2}{n+3} \) (w miejsce \( n \) wstawiamy \( n+1 \)). Zatem:</p>
+                    <p>\[
+                        a_{n+1} - a_n = \frac{n+2}{n+3} - \frac{n+1}{n+2} = \frac{(n+2)^2 - (n+1)(n+3)}{(n+3)(n+2)} = \frac{n^2 + 4n + 4 - n^2 - 3n - n - 3}{(n+3)(n+2)} = \frac{1}{(n+3)(n+2)} > 0
+                    \]</p>
+                    <p>gdyż \( n \in \mathbb{N} \), więc mianownik jest dodatni i licznik również.</p>
+                    <p>Otrzymaliśmy więc, że ciąg o wyrazie ogólnym \( a_n = \frac{n+1}{n+2} \), jest <strong>rosnący</strong>.</p>
+                </div>
+            </ol>
+
+            <h2><strong>Zadanie 2. Na podstawie definicji granicy ciągu wykazać, że:</strong></h2>
+            <ol>
+                <li>\(\lim_{n \to \infty} \frac{5n-1}{n+2} = 5\)</li>
+                <button class="toggle-button" onclick="toggleSolution(3)">Pokaż rozwiązanie</button>
+                <div id="solution-3" class="solution">
+                    <p><strong><u>Rozwiązanie:</u></strong></p>
+                    <p>Mamy, że \(\lim_{n \to \infty} \frac{5n-1}{n+2} = 5\). Niech \(\epsilon\) będzie dowolną liczbą dodatnią. Z definicji granicy ciągu oznacza to, że \(\left| \frac{5n-1}{n+2} - 5 \right| < \epsilon\). Z zależności tej należy wyliczyć \( n \) w zależności od \(\epsilon\). Zatem:</p>
+                    <p>\[
+                        \left| \frac{5n-1}{n+2} - 5 \right| = \left| \frac{5n-1 - 5(n+2)}{n+2} \right| = \left| \frac{5n-1 - 5n-10}{n+2} \right| = \left| \frac{-11}{n+2} \right| = \frac{11}{n+2} < \epsilon
+                    \]</p>
+                    <p>Otrzymujemy, że \( n+2 > \frac{11}{\epsilon} \), czyli \( n > \frac{11}{\epsilon} - 2 \). Zatem dla dowolnie małego \(\epsilon > 0\), \( n \) musi być większe od \(\frac{11}{\epsilon} - 2\).</p>
+                    <p>Dowodzi to, że \(\lim_{n \to \infty} \frac{5n-1}{n+2} = 5\).</p>
+                </div>
+
+                <li>\(\lim_{n \to \infty} \frac{n+2}{2n+5} = \frac{1}{2}\)</li>
+                <button class="toggle-button" onclick="toggleSolution(4)">Pokaż rozwiązanie</button>
+                <div id="solution-4" class="solution">
+                    <p><strong><u>Rozwiązanie:</u></strong></p>
+                    <p>Mamy, że \(\lim_{n \to \infty} \frac{n+2}{2n+5} = \frac{1}{2}\). Niech \(\epsilon\) będzie dowolną liczbą dodatnią. Z definicji granicy ciągu oznacza to, że \(\left| \frac{n+2}{2n+5} - \frac{1}{2} \right| < \epsilon\). Z zależności tej należy wyliczyć \( n \) w zależności od \(\epsilon\). Zatem:</p>
+                    <p>\[
+                        \left| \frac{n+2}{2n+5} - \frac{1}{2} \right| = \left| \frac{2(n+2) - (2n+5)}{2(2n+5)} \right| = \left| \frac{2n + 4 - 2n - 5}{2(2n+5)} \right| = \left| \frac{-1}{2(2n+5)} \right| = \frac{1}{2(2n+5)} < \epsilon
+                    \]</p>
+                    <p>Otrzymujemy, że \( 2(2n+5) > \frac{1}{\epsilon} \), czyli \( n > \frac{1}{4\epsilon} - \frac{5}{2} \). Zatem dla dowolnie małego \(\epsilon > 0\), \( n \) musi być większe od \(\frac{1}{4\epsilon} - \frac{5}{2}\).</p>
+                    <p>Dowodzi to, że \(\lim_{n \to \infty} \frac{n+2}{2n+5} = \frac{1}{2}\).</p>
+                </div>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
